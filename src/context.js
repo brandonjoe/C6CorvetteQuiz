@@ -3,11 +3,12 @@ import {cars} from  './data';
 export const MyContext = React.createContext();
 class MyProvider extends Component {
     state={
-        questionsRight: 231423,
-        questionsWrong: 12321321,
+        questionsRight: 0,
+        questionsWrong: 0,
         carSelection: [],
         questionsList: [],
-        selectedCar: cars[0]
+        selectedCar: cars[0],
+        completed: false
     }
     componentWillMount(){
         this.setCars();
@@ -25,13 +26,20 @@ class MyProvider extends Component {
         
     }
     getRandomCar = () => {
-        let newCar = this.state.carSelection[Math.floor(Math.random()*this.state.carSelection.length)];
-        let index = this.state.carSelection.indexOf(newCar)
-        this.state.carSelection.splice(index, 1)
-        this.setState(() => {
-            return {selectedCar: newCar}
-        })
-        return newCar;
+        if(this.state.carSelection.length > 0){
+            let newCar = this.state.carSelection[Math.floor(Math.random()*this.state.carSelection.length)];
+            let index = this.state.carSelection.indexOf(newCar)
+            this.state.carSelection.splice(index, 1)
+            this.setState(() => {
+                return {selectedCar: newCar}
+            })
+            return newCar;
+        } else {
+            this.setState(() => {
+                return {completed: true}
+            })
+        }
+        
     }
     render() {
         return (

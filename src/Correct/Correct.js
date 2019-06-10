@@ -7,7 +7,7 @@ class Correct extends Component {
             <div className={classes.container}>
                 Correct!
                 {this.props.description}
-                <button onClick = {this.props.reset}>REWIND TIME</button>
+                <button onClick = {this.props.reset}>Next Question</button>
             </div>
         );
     }

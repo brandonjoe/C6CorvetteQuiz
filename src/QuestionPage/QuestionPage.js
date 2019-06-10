@@ -3,6 +3,8 @@ import Select from "react-select";
 import { MyConsumer } from "../context.js";
 import Correct from '../Correct/Correct'
 import Wrong from '../Wrong/Wrong';
+import classes from './QuestionPage.module.css'
+import Completed from '../Completed/Completed'
 // import classes from './QuestionPage.module.css'
 const options = [
   { value: 2005, label: "2005" },
@@ -53,6 +55,7 @@ class QuestionPage extends Component {
       return {isPicking: false}
     })
     let arr = [];
+    
     this.state.selectedOption.map(item => {
       return arr.push(parseInt(item.label));
     });
@@ -67,12 +70,32 @@ class QuestionPage extends Component {
     }
   };
   reset = () => {
-    let value = this.context
+    let value = this.context;
+    console.log(value.carSelection.length)
+    if(value.carSelection.length > 0){
+      this.setState({
+        isPicking: true,
+        isCorrect: false,
+        showCorrect: false,
+        showWrong: false,
+        selectedOption: [],
+        current: value.getRandomCar()      
+      })
+    } else {
+      this.setState({
+        completed: true
+      })
+    }
+   
+  }
+  resetPage = () => {
+    let value = this.context;
     this.setState({
       isPicking: true,
-      isCorrect: false,
-      selectedOption: [],
-      current: value.getRandomCar()      
+        isCorrect: false,
+        showCorrect: false,
+        showWrong: false,
+        selectedOption: [],
     })
   }
   render() {
@@ -80,21 +103,28 @@ class QuestionPage extends Component {
     const isCorrect = this.state.showCorrect;
     const isWrong = this.state.showWrong;
     const isPicking = this.state.isPicking;
+    const isDone = this.state.completed;
     let modal;
+    let completed;
     if(isCorrect && isPicking === false) {
+      this.context.questionsRight++
       modal = <Correct reset={this.reset} description={this.state.current.description} />;
     } else if (isWrong && isPicking === false) {
+      this.context.questionsWrong++
       modal = <Wrong /> 
     }
+    if(isDone)
+      completed = <Completed/>
+      console.log(this.context)
     return (
       <div>
         <MyConsumer>
           {value => {
-            console.log(value);
+            console.log(value.carSelection)
             return (
               <React.Fragment>
                 <div>What is the year of this car?</div>
-
+                <img className={classes.quizImg} src={value.selectedCar.img} />
                 <div>
                   {value.selectedCar.year.map((item, index) => {
                     return <div key={index}>{item}</div>;
@@ -113,6 +143,7 @@ class QuestionPage extends Component {
                   onClick={this.checkAnswer}
                 />
                 {modal}
+                {completed}
               </React.Fragment>
             );
           }}
