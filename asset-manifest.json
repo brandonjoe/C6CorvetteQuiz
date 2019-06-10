@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CorvetteQuiz/static/css/main.59b38c7c.chunk.css",
+    "main.js": "/CorvetteQuiz/static/js/main.3eb93491.chunk.js",
+    "main.js.map": "/CorvetteQuiz/static/js/main.3eb93491.chunk.js.map",
+    "runtime~main.js": "/CorvetteQuiz/static/js/runtime~main.357c9d19.js",
+    "runtime~main.js.map": "/CorvetteQuiz/static/js/runtime~main.357c9d19.js.map",
+    "static/js/2.b4a18b25.chunk.js": "/CorvetteQuiz/static/js/2.b4a18b25.chunk.js",
+    "static/js/2.b4a18b25.chunk.js.map": "/CorvetteQuiz/static/js/2.b4a18b25.chunk.js.map",
+    "index.html": "/CorvetteQuiz/index.html",
+    "precache-manifest.efb178e38f4ad01d913cc16a76cec5ed.js": "/CorvetteQuiz/precache-manifest.efb178e38f4ad01d913cc16a76cec5ed.js",
+    "service-worker.js": "/CorvetteQuiz/service-worker.js",
+    "static/css/main.59b38c7c.chunk.css.map": "/CorvetteQuiz/static/css/main.59b38c7c.chunk.css.map"
+  }
+}
