@@ -5,9 +5,12 @@ class Correct extends Component {
         console.log(this.props.description)
         return (
             <div className={classes.container}>
+                <div className={classes.main}>
                 Correct!
                 {this.props.description}
-                <button onClick = {this.props.reset}>Next Question</button>
+                <button onClick = {this.props.nextQuestion}>Next Question</button>
+                </div>
+               
             </div>
         );
     }

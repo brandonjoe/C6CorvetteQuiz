@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Select from "react-select";
 import { MyConsumer } from "../context.js";
-import Correct from '../Correct/Correct'
-import Wrong from '../Wrong/Wrong';
-import classes from './QuestionPage.module.css'
-import Completed from '../Completed/Completed'
+import Correct from "../Correct/Correct";
+import Wrong from "../Wrong/Wrong";
+import classes from "./QuestionPage.module.css";
+import Completed from "../Completed/Completed";
 // import classes from './QuestionPage.module.css'
 const options = [
   { value: 2005, label: "2005" },
@@ -18,17 +18,17 @@ const options = [
   { value: 2013, label: "2013" }
 ];
 class QuestionPage extends Component {
-  state = { 
+  state = {
     selectedOption: [],
     isPicking: true,
+    isCorrect: false,
+    isWrong: false,
     showCorrect: false,
-    showWrong: false
+    showWrong: false,
+    current: this.context.selectedCar
   };
   componentWillMount() {
     let value = this.context;
-    this.setState({
-      current: value.getRandomCar()
-    });
   }
   handler = selectedOption => {
     this.setState({ selectedOption });
@@ -52,52 +52,62 @@ class QuestionPage extends Component {
   }
   checkAnswer = () => {
     this.setState(() => {
-      return {isPicking: false}
-    })
+      return {
+        isPicking: false,
+        selectedOption: []
+      };
+    });
     let arr = [];
-    
+
     this.state.selectedOption.map(item => {
       return arr.push(parseInt(item.label));
     });
-    if (this.arraysEqual(this.state.current.year, arr) === true) {
+    if (this.arraysEqual(this.context.selectedCar.year, arr) === true) {
       this.setState(() => {
-        return {showCorrect: true}
-      })
+        return { showCorrect: true };
+      });
+      this.context.incrementQuestionsRight();
     } else {
+      this.context.incrementQuestionsWrong();
       this.setState(() => {
-        return {showWrong: true}
-      })
+        return { showWrong: true };
+      });
     }
   };
-  reset = () => {
+  nextQuestion = () => {
     let value = this.context;
-    console.log(value.carSelection.length)
-    if(value.carSelection.length > 0){
+    if (value.carSelection.length > 1) {
+      value.getNextCar();
       this.setState({
         isPicking: true,
         isCorrect: false,
         showCorrect: false,
         showWrong: false,
         selectedOption: [],
-        current: value.getRandomCar()      
-      })
+        current: value.selectedCar
+      });
     } else {
       this.setState({
         completed: true
-      })
+      });
     }
-   
-  }
-  resetPage = () => {
+  };
+  restartPage = () => {
+    console.log("aaaaa");
     let value = this.context;
+    value.restartPage();
+    console.log(value.carSelection);
     this.setState({
+      selectedOption: [],
       isPicking: true,
-        isCorrect: false,
-        showCorrect: false,
-        showWrong: false,
-        selectedOption: [],
-    })
-  }
+      isCorrect: false,
+      isWrong: false,
+      showCorrect: false,
+      showWrong: false,
+      completed: false,
+      current: value.selectedCar
+    });
+  };
   render() {
     const { selectedOption } = this.state;
     const isCorrect = this.state.showCorrect;
@@ -106,21 +116,26 @@ class QuestionPage extends Component {
     const isDone = this.state.completed;
     let modal;
     let completed;
-    if(isCorrect && isPicking === false) {
-      this.context.questionsRight++
-      modal = <Correct reset={this.reset} description={this.state.current.description} />;
+    if (isCorrect && isPicking === false) {
+      modal = (
+        <Correct
+          nextQuestion={this.nextQuestion}
+          description={this.state.current.description}
+        />
+      );
     } else if (isWrong && isPicking === false) {
-      this.context.questionsWrong++
-      modal = <Wrong /> 
+      modal = <Wrong nextQuestion={this.nextQuestion}
+      description={this.state.current.description}/>;
     }
-    if(isDone)
-      completed = <Completed/>
-      console.log(this.context)
+    if (isDone) {
+      completed = <Completed restartPage={this.restartPage} />;
+    }
     return (
       <div>
         <MyConsumer>
           {value => {
-            console.log(value.carSelection)
+            console.log(value);
+            console.log(this.state);
             return (
               <React.Fragment>
                 <div>What is the year of this car?</div>
@@ -137,11 +152,8 @@ class QuestionPage extends Component {
                   onChange={this.handler}
                   options={options}
                 />
-                <input
-                  type="submit"
-                  value="Submit"
-                  onClick={this.checkAnswer}
-                />
+                <button onClick={this.checkAnswer}>Submit</button>
+             
                 {modal}
                 {completed}
               </React.Fragment>
