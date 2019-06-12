@@ -5,21 +5,24 @@ class Completed extends Component {
   render() {
     return (
       <MyConsumer>
-          {value => {
-              return(
-                <div className={classes.container}>
-                    <div className={classes.main}>
-                    Completed
-                <button onClick={this.props.restartPage}>Try the quiz again!</button>
-                <div> Questions right {value.questionsRight}</div>
-                <div> Questions right {value.questionsWrong}</div>
-                    </div>
-               
+        {value => {
+          return (
+            <div className={classes.container}>
+              <div className={classes.main}>
+              <div className={classes.title}>Finished!</div>
+                <div className={classes.icon}> <i class="fas fa-flag-checkered fa-3x" /> </div>
+                <div className={classes.results}>
+                  <div> Questions right: <br /> {value.questionsRight}</div>
+                  <div> Questions wrong: <br /> {value.questionsWrong}</div>
+                </div>
+                <button className={classes.again} onClick={this.props.restartPage}>
+                  Retake quiz
+                </button>
+                
               </div>
-              )
-  
-          }}
-      
+            </div>
+          );
+        }}
       </MyConsumer>
     );
   }

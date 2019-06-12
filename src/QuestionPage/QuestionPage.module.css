@@ -1,3 +1,43 @@
+.container{
+    height: 100rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+.header{
+    font-size: 2rem;
+    font-weight: 100;
+    letter-spacing: 5px;
+    margin-bottom: 3rem;
+    color: ghostwhite;
+}
+.title{
+    font-size: 2rem;
+    font-weight: 100;
+    letter-spacing: 5px;
+    margin-bottom: 3rem;
+    color: ghostwhite;
+}
+
 .quizImg{
-    height: 20rem;
+    height: 40rem;
+    border-radius: 3px;
+    margin-bottom: 2rem;
+}
+.select{
+    width: 15rem;
+    margin-bottom: 2rem;
+}
+.submit{
+    background: none;
+    color: ghostwhite;
+    border: 1px solid white;
+    padding: 1rem 2rem 1rem 2rem;
+    transition: all .2s;
+}
+.submit:hover{
+    transform: scale(1.1);
+    -webkit-font-smoothing: antialiased;
 }

@@ -5,13 +5,16 @@ class Correct extends Component {
         console.log(this.props.description)
         return (
             <div className={classes.container}>
-                <div className={classes.main}>
-                Correct!
-                {this.props.description}
-                <button onClick = {this.props.nextQuestion}>Next Question</button>
-                </div>
-               
-            </div>
+            <div className={classes.main}> 
+            <div className={classes.answer}>Correct</div>
+            <div className={classes.icon}> <i class="fas fa-check fa-3x"></i></div>
+           
+
+        <div className={classes.description}>{this.props.description}</div>
+        
+        <button className={classes.next} onClick = {this.props.nextQuestion}>Next Question</button></div>
+       
+    </div>
         );
     }
 }

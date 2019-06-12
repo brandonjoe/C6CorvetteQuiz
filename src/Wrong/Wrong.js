@@ -4,9 +4,14 @@ class Wrong extends Component {
     render() {
         return (
             <div className={classes.container}>
-                <div className={classes.main}> Wrong!
-            {this.props.description}
-            <button onClick = {this.props.nextQuestion}>Next Question</button></div>
+                <div className={classes.main}> 
+                <div className={classes.answer}>Incorrect</div>
+                <div className={classes.icon}> <i class="fas fa-times fa-3x"></i></div>
+               
+
+            <div className={classes.description}>{this.props.description}</div>
+            
+            <button className={classes.next} onClick = {this.props.nextQuestion}>Next Question</button></div>
            
         </div>
         );

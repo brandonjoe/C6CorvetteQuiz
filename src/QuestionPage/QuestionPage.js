@@ -127,8 +127,13 @@ class QuestionPage extends Component {
       modal = <Wrong nextQuestion={this.nextQuestion}
       description={this.state.current.description}/>;
     }
-    if (isDone) {
+    if (isDone && (isCorrect === true || isWrong === true)) {
+      modal = <div></div>;
       completed = <Completed restartPage={this.restartPage} />;
+    }
+    if(this.state.selectedOption.length === 0)
+    {
+
     }
     return (
       <div>
@@ -138,24 +143,24 @@ class QuestionPage extends Component {
             console.log(this.state);
             return (
               <React.Fragment>
-                <div>What is the year of this car?</div>
+                <div className={classes.container}>
+                  <div className={classes.header}>How well do you know your C6 Corvettes? Take the quiz to find out!</div>
+                <div className={classes.title}>What is the year of this car?</div>
                 <img className={classes.quizImg} src={value.selectedCar.img} />
-                <div>
-                  {value.selectedCar.year.map((item, index) => {
-                    return <div key={index}>{item}</div>;
-                  })}
-                </div>
-                <Select
+                
+                <Select className={classes.select}
                   isSearchable={true}
                   isMulti={true}
                   value={selectedOption}
                   onChange={this.handler}
                   options={options}
                 />
-                <button onClick={this.checkAnswer}>Submit</button>
+                <button disabled={this.state.selectedOption.length == 0} className={classes.submit} onClick={this.checkAnswer}>Submit</button>
              
                 {modal}
                 {completed}
+                </div>
+              
               </React.Fragment>
             );
           }}

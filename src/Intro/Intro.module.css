@@ -1,15 +1,58 @@
+@font-face {
+    font-family: 'grandsport';
+    src:  url('../Media/grandsport.ttf')  format('truetype') /* Safari, Android, iOS */
+      
+  }
 .container{
     top: 0;
     left: 0;
     height: 100vh;
     width: 100%;
     background-image: linear-gradient(
-        to right bottom,
-        rgba(0,0,0, .6),
-        rgba(0,0,0, 0)),
+        to bottom,
+        rgba(0,0,0, 0),
+        rgba(0,0,0, 1)),
         url("../Media/landingback.jpg");
     background-size: cover;
     background-repeat: none;
     background-position: center;
     max-width: 100%;
+    
+    font-family: 'Julius Sans One', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+} 
+.main{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    top: 6rem;
+}
+.title{
+    font-size: 4rem;
+    margin-bottom: 5rem;
+    letter-spacing: 14px;
+    font-weight: 100;
+}
+.info{
+    font-family: "Lato";
+    font-size: 1rem;
+    letter-spacing: 4px;
+    align-self: flex-start;
+    text-align: left;
+}
+.car{
+    font-family: "grandsport", sans-serif;
+    position: absolute;
+    bottom: 10rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem
 }

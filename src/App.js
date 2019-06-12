@@ -1,12 +1,12 @@
 import React from 'react';
-import QuestionPage from './QuestionPage/QuestionPage.js'
+import Intro from './Intro/Intro.js'
 import './App.css';
-import Intro from './Intro/Intro'
+import Body from './Body/Body'
 function App() {
   return (
     <div className="App">
       <Intro />
-     <QuestionPage />
+     <Body />
     </div>
   );
 }
