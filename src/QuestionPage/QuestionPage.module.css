@@ -22,9 +22,14 @@
 }
 
 .quizImg{
-    height: 40rem;
+    height: 20rem;
     border-radius: 3px;
     margin-bottom: 2rem;
+    transition: all .2s;
+}
+.quizImg:hover{
+    transform: scale(1.05);
+    cursor: pointer;
 }
 .select{
     width: 15rem;
@@ -40,4 +45,20 @@
 .submit:hover{
     transform: scale(1.1);
     -webkit-font-smoothing: antialiased;
+}
+.amount{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-bottom: 2rem;
+}
+.lightcontent{
+    position: relative;
+    width: 100vw;
+}
+.close{
+    color: white;
+    position: fixed;
+top: 1rem;
+    right: 5%;
 }

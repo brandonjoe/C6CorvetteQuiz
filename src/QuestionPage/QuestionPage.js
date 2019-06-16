@@ -5,6 +5,7 @@ import Correct from "../Correct/Correct";
 import Wrong from "../Wrong/Wrong";
 import classes from "./QuestionPage.module.css";
 import Completed from "../Completed/Completed";
+import Lightbox from '../Lightbox/Lightbox';
 // import classes from './QuestionPage.module.css'
 const options = [
   { value: 2005, label: "2005" },
@@ -25,7 +26,8 @@ class QuestionPage extends Component {
     isWrong: false,
     showCorrect: false,
     showWrong: false,
-    current: this.context.selectedCar
+    current: this.context.selectedCar,
+    enlarge: false
   };
   componentWillMount() {
     let value = this.context;
@@ -108,14 +110,39 @@ class QuestionPage extends Component {
       current: value.selectedCar
     });
   };
+  enlarge = () => {
+    console.log('clicked image')
+    this.setState({
+      enlarge: true
+    })
+  }
+  clicked = () => {
+    this.setState({
+      enlarge: false
+    })
+  }
   render() {
     const { selectedOption } = this.state;
     const isCorrect = this.state.showCorrect;
     const isWrong = this.state.showWrong;
     const isPicking = this.state.isPicking;
     const isDone = this.state.completed;
+    const enlarge = this.state.enlarge;
+    let enlargeimg;
     let modal;
     let completed;
+    if(enlarge === true){
+      enlargeimg = (
+        <React.Fragment>
+          <div className={classes.lightcontent}>
+          <Lightbox image={this.context.selectedCar.img}/>
+          <div className={classes.close} onClick={this.clicked}><i class="fas fa-times fa-3x"/></div>
+   
+          </div>
+         
+        </React.Fragment>
+        )
+    }
     if (isCorrect && isPicking === false) {
       modal = (
         <Correct
@@ -146,7 +173,8 @@ class QuestionPage extends Component {
                 <div className={classes.container}>
                   <div className={classes.header}>How well do you know your C6 Corvettes? Take the quiz to find out!</div>
                 <div className={classes.title}>What is the year of this car?</div>
-                <img className={classes.quizImg} src={value.selectedCar.img} />
+                <img className={classes.quizImg} src={value.selectedCar.img} onClick={this.enlarge} />
+                <div className={classes.amount}>{value.selectedCar.answer}</div>
                 
                 <Select className={classes.select}
                   isSearchable={true}
@@ -156,7 +184,7 @@ class QuestionPage extends Component {
                   options={options}
                 />
                 <button disabled={this.state.selectedOption.length == 0} className={classes.submit} onClick={this.checkAnswer}>Submit</button>
-             
+             {enlargeimg}
                 {modal}
                 {completed}
                 </div>
