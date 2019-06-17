@@ -9,7 +9,7 @@ export const cars = [
   {
     id:2,
     year: [2006],
-    description: `This one is 2006 because they didn't make this color until 2004`,
+    description: `This one is 2005 because they didn't make this color until 2004`,
     img: "img/id2.jpg",
     answer: "Answer has 1 year"
   }
